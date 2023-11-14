@@ -31,5 +31,7 @@ func main() {
 		c.JSON(200, shopMap[shopName])
 	})
 
+	r.GET("/health-check", func(c *gin.Context) { c.JSON(200, "ok") })
+
 	r.Run(":8000")
 }

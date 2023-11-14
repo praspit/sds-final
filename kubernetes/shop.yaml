@@ -34,8 +34,8 @@ spec:
               name: sds-config
         livenessProbe:
           httpGet:
-            path: /health
-            port: 8080
+            path: /health-check
+            port: 8000
           initialDelaySeconds: 3
           periodSeconds: 3
 
@@ -49,5 +49,5 @@ spec:
     app: shop-service
   ports:
   - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 8000
+    targetPort: 8000

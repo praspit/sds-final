@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sds-config
+data:
+  SHOP_HOST: "shop-service-service"
+  SHOP_PORT: "8000"
