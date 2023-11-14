@@ -1,6 +1,8 @@
 package main
 
 import (
+	"sds-final/common"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,11 +26,11 @@ func main() {
 
 	r.GET("/", func(c *gin.Context) { c.JSON(200, "Hello, this is shop service") })
 
-	r.GET("/shop", func(c *gin.Context) { c.JSON(200, shopMap) })
+	r.GET("/shop", func(c *gin.Context) { c.JSON(200, common.MapOfMapResponse{Data: shopMap}) })
 
 	r.GET("/shop/:shopName", func(c *gin.Context) {
 		shopName := c.Param("shopName")
-		c.JSON(200, shopMap[shopName])
+		c.JSON(200, common.MapResponse{Data: shopMap[shopName]})
 	})
 
 	r.GET("/health-check", func(c *gin.Context) { c.JSON(200, "ok") })
