@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-deployment
+  labels:
+    app: payment-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-deployment
+  template:
+    metadata:
+      labels:
+        app: payment-deployment
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
+      containers:
+        - name: payment-container
+          image: bugguga/sds-project-payment:main-02ac7d8
+          ports:
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service-service
+spec:
+  selector:
+    app: payment-deployment
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081

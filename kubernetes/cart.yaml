@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-deployment
+  labels:
+    app: cart-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cart-deployment
+  template:
+    metadata:
+      labels:
+        app: cart-deployment
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
+      containers:
+        - name: cart-container
+          image: wrcing21/cart-service:v2.0.4
+          env:
+            - name: CART_HOST
+              value: localhost
+          ports:
+            - containerPort: 8002
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-service-service
+spec:
+  selector:
+    app: cart-deployment
+  ports:
+  - protocol: TCP
+    port: 8002
+    targetPort: 8002

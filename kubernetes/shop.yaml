@@ -14,24 +14,11 @@ spec:
       labels:
         app: shop-service
     spec:
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1  
-              preference:
-                matchExpressions:
-                - key: nodename
-                  operator: In
-                  values:
-                  - worker1
       containers:
       - name: shop-service
         image: praspit/sds-shop-service:latest
         ports:
         - containerPort: 8000
-        envFrom:
-          - configMapRef:
-              name: sds-config
         livenessProbe:
           httpGet:
             path: /health-check
