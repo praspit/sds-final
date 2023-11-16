@@ -5,7 +5,7 @@ WORKDIR /go/src/sds
 ADD . .
 WORKDIR /go/src/sds/apps
 RUN go get sds-final
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags '-extldflags "-static"' -o app ${SERVICE_NAME}/main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -a -ldflags '-extldflags "-static"' -o app ${SERVICE_NAME}/main.go
 
 #final stage
 FROM alpine:latest
